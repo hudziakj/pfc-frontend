@@ -45,7 +45,7 @@ export default {
     async login() {
       try {
         // Faz a requisição para a rota /users/login do backend
-        const response = await api.post('/users/login', {
+        const response = await api.post("users/login", {
           email: this.email,
           senha: this.password,
         });
