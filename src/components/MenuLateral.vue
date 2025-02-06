@@ -4,6 +4,7 @@
       <!-- Avatar no topo do menu lateral -->
       <div class="avatar-container">
         <img :src="avatarUrl" alt="Avatar" class="avatar" v-if="avatarUrl" />
+        <div class="avatar-default" v-else></div> <!-- Círculo branco quando não houver avatar -->
       </div>
       <p v-if="user.nome" class="user-name">{{ user.nome }}</p> <!-- Nome do usuário -->
       <button @click="navigateTo('CriarChamado')">Criar Chamado</button>
@@ -79,18 +80,27 @@ export default {
   font-size: 1.1rem;
 }
 
-/* Envolver Foto do perfil*/
+/* Envolver Foto do perfil */
 .avatar-container {
   display: flex;
   justify-content: center;
 }
 
-/* Foto do perfil*/
+/* Foto do perfil */
 .avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* Avatar padrão - círculo branco */
+.avatar-default {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #ccc; /* Opcional: borda para dar destaque */
 }
 
 /* Menu lateral */
