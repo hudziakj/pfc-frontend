@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
+
 import LoginPage from "@/views/Login.vue";
 import RegisterPage from "@/views/Register.vue";
 import ChamadosPage from "@/views/ChamadosPage.vue";
@@ -56,29 +57,23 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes,
 });
 
 // Impede que o usuário acesse uma rota sem estar logado
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem("token"); // Verifica se o token existe
+  const isAuthenticated = localStorage.getItem("token");
 
   console.log("Rota acessada:", to.path);
   console.log("Usuário autenticado:", isAuthenticated ? "Sim" : "Não");
-
-  // Se o usuário autenticado tentar acessar "/login" ou "/", redireciona para "/chamados"
   if ((to.path === "/" || to.path === "/login") && isAuthenticated) {
     console.log("Redirecionando para /chamados");
     next({ path: "/chamados", replace: true });
-  }
-  // Se a rota requer autenticação e o usuário não está logado, redireciona para "/403"
-  else if (to.meta.requiresAuth && !isAuthenticated) {
+  } else if (to.meta.requiresAuth && !isAuthenticated) {
     console.log("Acesso negado! Redirecionando para /403");
     next("/403");
-  }
-  // Permite acesso normal
-  else {
+  } else {
     console.log("Acesso permitido!");
     next();
   }
