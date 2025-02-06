@@ -52,15 +52,14 @@ export default {
       try {
         const token = localStorage.getItem("token"); // Pegue o token do localStorage
         const userId = localStorage.getItem('userId');
-        const response = await api.get('http://localhost:5000/tickets/', {
+        const response = await api.get('tickets/', {
           headers: {
-            Authorization: `Bearer ${token}`, // Adiciona o token ao cabeçalho da requisição
+            Authorization: `Bearer ${token}`,
           },
           params: {userId: userId}
         });
 
-        this.chamados = response.data; // Adapte os campos conforme os dados da API]
-        console.log(this.chamados)
+        this.chamados = response.data;
       } catch (err) {
         console.error('Erro ao carregar chamados', err);
       }

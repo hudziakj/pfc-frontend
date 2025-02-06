@@ -39,7 +39,6 @@
 
 <script>
 import api from "@/utils/axios.js"; // Importa o Axios configurado
-import axios from 'axios';
 
 export default {
   name: "CriarChamado",
@@ -64,7 +63,7 @@ export default {
     async fetchUsuarios() {
       try {
         const token = localStorage.getItem("token"); // Pegue o token do localStorage
-        const response = await axios.get(`http://localhost:5000/users/usuarios`, {
+        const response = await api.get(`users/usuarios`, {
           headers: {
             Authorization: `Bearer ${token}`, // Adiciona o token ao cabeçalho da requisição
           },

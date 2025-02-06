@@ -101,7 +101,7 @@ export default {
 
   try {
     this.loading = true;
-    const response = await api.post("http://localhost:5000/users/register", formData, {
+    const response = await api.post("users/register", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     

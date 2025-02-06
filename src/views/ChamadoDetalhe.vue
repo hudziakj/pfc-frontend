@@ -113,8 +113,7 @@
 
 
 <script>
-import axios from 'axios';
-
+import api from "@/utils/axios.js"; // Importa o Axios configurado
 
 export default {
   data() {
@@ -133,20 +132,19 @@ export default {
     async fetchTicketDetail() {
       try {
         const token = localStorage.getItem("token"); // Pegue o token do localStorage
-        const response = await axios.get(`http://localhost:5000/tickets/${this.$route.params.id}`, {
+        const response = await api.get(`tickets/${this.$route.params.id}`, {
           headers: {
             Authorization: `Bearer ${token}`, // Adiciona o token ao cabeçalho da requisição
           },
         });
         this.ticket = response.data;
-        console.log(this.ticket.comentarios);
       } catch (error) {
         console.error("Erro ao carregar os detalhes do chamado:", error);
       }
     },
     async addComment() {
       if (this.newComment.trim()) {
-        this.loading = true; // Indica carregamento
+        this.loading = true;
         try {
           const token = localStorage.getItem("token");
           let userId = localStorage.getItem("userId");
@@ -156,8 +154,8 @@ export default {
           // Remover aspas ou barras invertidas, caso existam
           userId = userId.replace(/["\\]/g, '');  // Remove aspas e barras invertidas
           
-          await axios.post(
-            `http://localhost:5000/tickets/${this.ticket._id}/comentarios`,
+          await api.post(
+            `tickets/${this.ticket._id}/comentarios`,
             {
               comentario: this.newComment,
               usuarioId: userId, // ID do usuário logado

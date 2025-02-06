@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/utils/axios.js"; // Importa o Axios configurado
 
 export default {
   data() {
@@ -43,7 +43,7 @@ export default {
     async fetchUser() {
       try {
         const userId = localStorage.getItem("userId").replace(/^"|"$/g, "");
-        const response = await axios.get(`http://localhost:5000/users/${userId}`, {
+        const response = await api.get(`users/${userId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Token do usuário
           },
