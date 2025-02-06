@@ -33,6 +33,12 @@ import api from '@/utils/axios.js'; // Certifique-se de que a configuração do 
 
 export default {
   name: "LoginPage",
+  created() {
+    console.log("🚀 Login.vue carregado!");
+  },
+  mounted() {
+    console.log("🎯 Login.vue montado!");
+  },
   data() {
     return {
       email: '',
