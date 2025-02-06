@@ -29,10 +29,16 @@
 
 <script>
 import "../styles/Login.css";
-import api from '@/utils/axios.js'; // Certifique-se de que a configuração do axios está correta
+import api from '@/utils/axios.js';
 
 export default {
   name: "LoginPage",
+  created() {
+    console.log("🚀 Login.vue carregado!");
+  },
+  mounted() {
+    console.log("🎯 Login.vue montadooo!");
+  },
   data() {
     return {
       email: '',
@@ -45,7 +51,7 @@ export default {
     async login() {
       try {
         // Faz a requisição para a rota /users/login do backend
-        const response = await api.post("users/login", {
+        const response = await api.post('/users/login', {
           email: this.email,
           senha: this.password,
         });
